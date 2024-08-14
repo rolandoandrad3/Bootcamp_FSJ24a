@@ -79,6 +79,7 @@ nav ul li{
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+
     flex-flow: row wrap;
 }
 
@@ -280,7 +281,7 @@ h5{
     .nosotros-imagen{
         flex: 0 0 100%;
     }
-}
+} 
 
 /* nav a{
     margin: .6rem;
