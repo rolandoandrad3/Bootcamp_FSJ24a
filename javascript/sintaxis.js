@@ -138,3 +138,8 @@ function calcularDescuento(cantidad) {
 
 const cantidadCafes = 12;
 console.log(`El precio para ${cantidadCafes} cafés es: $${calcularDescuento(cantidadCafes).toFixed(2)}`);
+
+
+//Estructuras repetitivas: for, while, do while
+
+
