@@ -62,7 +62,6 @@ for(const indice in arreglo_lenguajes){
 - Obtener cuantos alumnos estan en recuperacion (deben tener una nota entre 5 y 6.9)
  - Obtener cuantos alumnos reprobaron */
 
-
-
+ //readline
 
 
