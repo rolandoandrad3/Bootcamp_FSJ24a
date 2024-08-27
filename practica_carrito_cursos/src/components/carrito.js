@@ -1,3 +1,4 @@
+import Swal from "sweetalert2";
 //declarando el arreglo para guardar los cursos
 let arregloCarrito = [];
 /** accedemos al tbody especificando en la tabla que se encuentra con su id */
@@ -15,6 +16,19 @@ export function agregarCurso(e){
         const cursoSeleccionado = e.target.parentElement.parentElement;
         //console.log(cursoSeleccionado);
 
+        //una vez seleccionado el curso vamos a deshabilitar el boton
+        //agregar clase => classList.add()
+        e.target.classList.add('disabled');
+        //cambiando el texto del boton
+        e.target.textContent = 'Ir al carrito';
+        
+        //asignamos una alerta
+        Swal.fire({
+            icon: "success",
+            title: "Agregaste un curso!",
+            showConfirmButton: false,
+            timer: 1500
+        });
         //llamamos la funcion para leer los datos del curso que selecciono el usuario
         leerDatosCurso(cursoSeleccionado);
     }
@@ -36,16 +50,20 @@ function leerDatosCurso(curso){
     console.log(arregloCarrito);
 
     //una vez agregado los cursos al arreglo dibujamos en la table
-    carritoHTML();
+    carritoHTML(); //reaccione
 }
 
 //Iterar el arreglo de los cursos en la tabla html
 function carritoHTML(){
+    //reseteamos el tbody
+    bodyCarrito.innerHTML = "";
     //iterando un arreglo (map(), foreach(), for, while, do while)
     arregloCarrito.map(curso => {
         //creando una fila (tr)
         const fila = document.createElement('tr');
         //dibujando las celdas de cada fila
+
+        //manera de concatenar (interpolacion de cadenas `${}`)
         fila.innerHTML = `
             <td>
                 <img src="${curso.imagen}" width="100">
@@ -59,4 +77,51 @@ function carritoHTML(){
         //insertando las filas en <tbody>
         bodyCarrito.appendChild(fila)
     })
+}
+
+//removeChild
+
+//funcion para eliminar un curso por su id
+export function eliminarCurso(e){
+    if(e.target.classList.contains('borrar_curso')){
+        //obtenemos el data-id del curso que selecciono la persona
+        const cursoId = e.target.getAttribute('data-id'); //id (2)
+
+        //boton que voy habilitar si se elimina el curso
+        const habilitarBoton = document.querySelector(`button[data-id="${cursoId}"]`); //<button >
+        console.log(habilitarBoton);
+        
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                //filtrando los cursos que sean diferente al id seleccionado
+                arregloCarrito = arregloCarrito.filter(curso => curso.id !== cursoId);
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+
+                //condicionamos para habilitar el boton
+                if(habilitarBoton){
+                    //removemos la clase "disabled"
+                    habilitarBoton.classList.remove('disabled');
+
+                    //cambiamos el texto
+                    habilitarBoton.textContent = "Agregar al carrito";
+                }
+                //una vez filtrado el arreglo actualizalo en el html (tabla)
+                carritoHTML();
+            }
+        });
+    }
 }
