@@ -3,10 +3,24 @@ import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 import sintaxisTS from './sintaxis'
 import { variable1 } from './prueba'
+import { Estudiante } from './clases'
 
 //Llamando a la funcion de sintaxis
 sintaxisTS();
 console.log(variable1);
+//creando un objeto
+let estudiante1 = new Estudiante("Kenia","Chacon","kenia@gmail.com","KP001","123","FSJ24"); //inicializar el constructor
+console.log(estudiante1);
+estudiante1.nombre = "Maria Jose";
+estudiante1.bootcamp = "Bootcamp FSJ24A";
+// estudiante1.carnet = "KP455";
+// estudiante1.password = "hh";
+console.log(estudiante1.apellido);
+
+estudiante1.saludar();
+//Utilizando metodo get y set
+estudiante1.setPassword("KP2024HHHHHHHHHHH");
+console.log(estudiante1.getPassword());
 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
