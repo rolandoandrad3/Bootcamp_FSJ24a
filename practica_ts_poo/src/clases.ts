@@ -26,10 +26,13 @@ export class Estudiante{
         this.password = pass;
         this.bootcamp = bootcamp;
         this.rol = "Estudiante";
+        //Abstraccion, encapsulamiento, herencia y polimorfismo
+        //modificadores de acceso => public(global), protected(dentro de la clase y clases hijas), private(acceso dentro la clase)
     }
 
     //metodos
     saludar(){
+        this.bootcamp = "FSJ24";
         let valor = "texto";
         valor;
         this.apellido = "chacon";

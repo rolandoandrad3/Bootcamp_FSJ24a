@@ -12,8 +12,9 @@ console.log(variable1);
 let estudiante1 = new Estudiante("Kenia","Chacon","kenia@gmail.com","KP001","123","FSJ24"); //inicializar el constructor
 console.log(estudiante1);
 estudiante1.nombre = "Maria Jose";
+estudiante1.apellido = "Ramirez";
 estudiante1.bootcamp = "Bootcamp FSJ24A";
-// estudiante1.carnet = "KP455";
+//estudiante1.carnet = "KP455";
 // estudiante1.password = "hh";
 console.log(estudiante1.apellido);
 
