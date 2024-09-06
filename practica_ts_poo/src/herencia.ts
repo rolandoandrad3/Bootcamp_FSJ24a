@@ -30,12 +30,13 @@ class Persona{
 
     verPerfil(){
         //code..
+        console.log(`Datos Personales: Nombre Completo ${this.nombre} ${this.apellido}`);
     }
 }
 
 
 //CLASES HIJAS
-class Coach extends Persona{
+export class Coach extends Persona{
     //atributos exclusivos para el coach
     bootcamp:string;
 
@@ -45,8 +46,13 @@ class Coach extends Persona{
         super(nombre, apellido, correo, pass, dui);
         this.bootcamp = bootcamp;
     }
+
+    //cambiamos el comportamiento de un metodo de la clase padre
+    verPerfil(): void {
+        console.log(`Coach: ${this.nombre} ${this.apellido}, Bootcamp: ${this.bootcamp}`);
+    }
 }
 
-//crear un coach ()
-let coach = new Coach("Oscar","Lemus","oscar@kodigo.org","oscar","12345-6","FSJ22");
-console.log(coach);
+//Polimorfismo (el polimorfismo existe solo cuando tenemos herencia)
+
+

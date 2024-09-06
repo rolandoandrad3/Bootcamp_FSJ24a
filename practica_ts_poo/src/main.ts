@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import sintaxisTS from './sintaxis'
 import { variable1 } from './prueba'
 import { Estudiante } from './clases'
+import { Coach } from './herencia'
 
 //Llamando a la funcion de sintaxis
 sintaxisTS();
@@ -20,8 +21,16 @@ console.log(estudiante1.apellido);
 
 estudiante1.saludar();
 //Utilizando metodo get y set
-estudiante1.setPassword("KP2024HHHHHHHHHHH");
+estudiante1.setPassword("KP2024");
 console.log(estudiante1.getPassword());
+
+
+//crear un coach ()
+let coach = new Coach("Oscar","Lemus","oscar@kodigo.org","oscar","12345-6","FSJ22");
+console.log(coach);
+coach.getDui(); //12345-6
+coach.verPerfil();
+
 
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
