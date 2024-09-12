@@ -1,13 +1,7 @@
 /** async - await (promesas) (funciones asincronica) */
 
-//funcion de consumimos un endpoint
-
-//funcion otro endpoint para cada personaje
-
-//funcion para el contenido
-
 //declarando una funcion asincronica para los datos de los personajes
-export async function getAllCharacters(planet_selected) {
+export async function getAllCharacters() {
     try{
         const response = await fetch("https://dragonball-api.com/api/characters");
         const data = await response.json();
@@ -19,9 +13,6 @@ export async function getAllCharacters(planet_selected) {
 
         //LLAMANDO AL CONTENEDOR PARA LA LISTA DE PERSONAJES
         const dragonBallContainer = document.getElementById('list-dragon-ball');
-
-        //limpiando el contenido
-        dragonBallContainer.innerHTML = "";
 
         //return items;
         //for of => iterar elementos de arreglos y objetos
@@ -42,27 +33,20 @@ export async function getAllCharacters(planet_selected) {
             const { name: planet } = originPlanet 
 
             const itemTransformation = transformations.map(({ name }) => name)
-            //[nombres de las transformaciones]
             //console.log("Transformaciones: ", itemTransformation); //[]
             
-            //Validando si el planeta es el mismo seleccionado
-            // || &&
-            if(!planet_selected || planet_selected == planet){
-                //creando un nuevo elemento html (article)
-                const article = document.createElement('article');
-                //operador ternario ? proceso : otra cosa
-                article.innerHTML = `
-                    <h4>${nameCharacter}</h4>
-                    <img src=${image} >
-                    <p>Raza: ${race}</p>
-                    <p>Planeta: ${planet}</p>
-                    <p>Tranformaciones: ${itemTransformation.length > 0 ? itemTransformation.join(', ') : 'No hay transformaciones'}</p>
-                `;
-                //agregar un hijo al contenedor de la lista de personajes
-                dragonBallContainer.appendChild(article)
-            }
-
-            
+            //creando un nuevo elemento html (article)
+            const article = document.createElement('article');
+            //operador ternario ? proceso : otra cosa
+            article.innerHTML = `
+                <h4>${nameCharacter}</h4>
+                <img src=${image} >
+                <p>Raza: ${race}</p>
+                <p>Planeta: ${planet}</p>
+                <p>Tranformaciones: ${itemTransformation.length > 0 ? itemTransformation.join(', ') : 'No hay transformaciones'}</p>
+            `;
+            //agregar un hijo al contenedor de la lista de personajes
+            dragonBallContainer.appendChild(article)
         }
     }catch(error){
         console.log('Error al obtener la data de dragon ball', error);
@@ -95,22 +79,7 @@ export async function getPlanets() {
             //appendChild
             containerPlanet.appendChild(select);
         }
-
-        //capturando el valor del select
-        select.addEventListener('change', (e) => {
-            //console.log("seleccionaste algo");
-            const selected_planet = e.target.value;
-            console.log(selected_planet);
-            //llamamos la funcion y mandamos como argumento lo que la persona seleccione
-            getAllCharacters(selected_planet);
-        })
-
     }catch(error){
         console.log("Error al obtener los planetas", error);
     }
 }
-
-
-
-
-

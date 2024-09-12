@@ -4,9 +4,11 @@ import viteLogo from '/vite.svg'
 import { setupCounter } from './counter.js'
 import { poke, type, id, abilities, item1, item2, item3, saludar } from './desestructuracion.js'
 import { getAllCharacters, getPlanets } from './characters.js'
+import { displayCharacters } from './display_characters.js'
 
-getPlanets();
-getAllCharacters();
+displayCharacters();
+//getPlanets();
+//getAllCharacters();
 
 saludar()
 
