@@ -1,4 +1,8 @@
+import { useState } from 'react'
 import './App.css'
+import Form from './components/Form'
+import ListNotes from './components/ListNotes'
+import Notes from './components/Notes'
 import Header from './Header'
 
 /**
@@ -11,6 +15,8 @@ import Header from './Header'
  */
 
 function App() {
+  //estado para guardar las notas
+  const [listNotes, setListNotes] = useState([])
   /**
    * React.Fragment
    */
@@ -21,10 +27,21 @@ function App() {
        * 
       */}
       <Header fullname="Alejandra Villatoro" saludo="Que ondas!"/>
-
-      <Header fullname="Melvin Gonzalez" saludo="Buenas Noches"/>
-
-      <Header fullname="Orlando" saludo="Hola a todos!"/>
+      <div className='container'>
+        <section>
+          <h2>Registrando Notas</h2>
+          {/**
+           * en el formulario le pasamos 2 propiedades
+           */}
+          <Form listNotes={listNotes} setListNotes={setListNotes}/>
+        </section>
+        <section>
+          <h2>Notas..</h2>
+          <ListNotes listNotes={listNotes}/>
+        </section>
+        {/* <Notes title="Aprendiendo Props" description="Las props las podemos heredar.."/>
+        <Notes title="Introduccion al estado" description="los estados de react.."/> */}
+      </div>
     </>
   )
 }
