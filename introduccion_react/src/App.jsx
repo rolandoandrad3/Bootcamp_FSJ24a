@@ -4,6 +4,7 @@ import ListNotes from './components/ListNotes'
 import Notes from './components/Notes'
 import Header from './Header'
 import styles from "./styles/App.module.css"
+import FormHook from './components/FormHook'
 
 /**
  * componentes funcionales, de clase
@@ -33,7 +34,8 @@ function App() {
           {/**
            * en el formulario le pasamos 2 propiedades
            */}
-          <Form listNotes={listNotes} setListNotes={setListNotes}/>
+          {/* <Form listNotes={listNotes} setListNotes={setListNotes}/> */}
+          <FormHook listNotes={listNotes} setListNotes={setListNotes}/>
         </section>
         <section>
           <h2>Notas..</h2>
