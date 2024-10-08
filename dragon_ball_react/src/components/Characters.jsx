@@ -2,8 +2,9 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import styles from '../styles/Characters.module.css'
 import { FaHeart } from "react-icons/fa";
+import Favorites from './Favorites';
 
-export default function Characters() {
+export default function Characters({favorite, setFavorite}) {
     //[]
     //un estado para guardar a los personajes de dragon ball
     const [characters, setCharacters] = useState([])
@@ -11,9 +12,6 @@ export default function Characters() {
     const [loading, setLoading] = useState(true)
     //estado para el manejo de errores
     const [error, setError] = useState(null)
-
-    //estado para los favoritos
-    const [favorite, setFavorite] = useState([])
 
     //metodo para agregar y eliminar de favoritos
     const toogleFavorite = (character) => {
@@ -87,13 +85,15 @@ export default function Characters() {
                             <div key={character.id} className={styles.card}>
                                 <img src={character.image} alt={character.name} />
                                 <h3>{character.name}</h3>
-                                <p>{character.ki <=0 ? <p>este guerrero no tiene ki</p> : character.ki }</p>
+                                <p>{character.ki <=0 ? 'este guerrero no tiene ki' : character.ki }</p>
                                 <p><strong>Raza:</strong> {character.race}</p>
                                 <button onClick={() => toogleFavorite(character)}><FaHeart className={isFavorite ? styles.active : styles.inactive}/></button>
                             </div>
                         )
                     })
                 }
+
+                
             </div>
         </div>
     )
