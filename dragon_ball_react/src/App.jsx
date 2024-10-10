@@ -28,7 +28,7 @@ function App() {
         <div>
           <h3>Personajes...</h3>
           {/* <Characters favorite={favorite} setFavorite={setFavorite}/> */}
-          <CharactersSWR />
+          <CharactersSWR favorite={favorite} setFavorite={setFavorite}/>
         </div>
         <div>
           <h3>Favoritos.</h3>
