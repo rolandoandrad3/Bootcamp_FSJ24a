@@ -2,6 +2,7 @@ import { addDoc, collection } from 'firebase/firestore';
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import db from '../firebase/appConfig';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterProduct() {
     const { register, handleSubmit, watch, formState: {errors} } = useForm()
@@ -11,20 +12,26 @@ export default function RegisterProduct() {
      * handleSubmit = es la accion de lo que voy hacer con la informacion
      */
 
+    //creando una constante para redirigir a una ruta
+    const navigate = useNavigate()
+
     console.log(watch('name'));
     //metodo para guardar un producto
-    const saveProduct = async () => {
+    const saveProduct = async (data) => {
         console.log("Se ha guardado");
+        console.log(data);
         
         //conectarnos a la bd y guardamos un documento
         try{
             await addDoc(collection(db, "products"), {
-                name: "Test",
-                description: "Test"
+                name: data.name,
+                description: data.description
             })
         }catch(error){
             console.error("Error al registrar el producto", error)
         }
+        //redireccionamos a lista de productos
+        navigate("/productos")
     }
     
     return (

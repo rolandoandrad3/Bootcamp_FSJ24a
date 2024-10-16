@@ -1,6 +1,8 @@
-import { collection, onSnapshot } from 'firebase/firestore'
+import { collection, deleteDoc, doc, onSnapshot } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import db from '../firebase/appConfig'
+import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 export default function ListProducts() {
     //declaramos un estado para la lista de productos
@@ -32,6 +34,35 @@ export default function ListProducts() {
         )
     }, [])
 
+    //funcion para eliminar un producto
+    const deleteProduct = (id) => {
+        console.log(id);
+        try{
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!"
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    //eliminar el documento
+                    deleteDoc(doc(db, "products", id));
+                    Swal.fire({
+                        title: "Deleted!",
+                        text: "Your file has been deleted.",
+                        icon: "success"
+                    });
+                }
+            });
+        }catch(error){
+            console.error("Error al eliminar un producto",error)
+        }
+        
+    }
+
     return (
         <div>
             <h2>Lista de Productos</h2>
@@ -44,8 +75,8 @@ export default function ListProducts() {
                                     <div>
                                         <h3>{product.name}</h3>
                                         <p>{product.description}</p>
-                                        <button>Editar</button>
-                                        <button>Eliminar</button>
+                                        <Link to={`/editar/${product.id}`}>Editar</Link>
+                                        <button onClick={() => deleteProduct(product.id)}>Eliminar</button>
                                     </div>
                                 </div>
                             )
