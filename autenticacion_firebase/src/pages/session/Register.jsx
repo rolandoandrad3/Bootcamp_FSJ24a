@@ -2,6 +2,9 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import {auth_user} from '../../firebase/appConfig';
+import { useNavigate } from 'react-router-dom';
 
 //creando un esquema (reglas) para validar el correo y password
 const schema = yup.object().shape({
@@ -17,10 +20,28 @@ export default function Register() {
         resolver: yupResolver(schema)
     })
 
+    //constante para la navegacion
+    const navigate = useNavigate()
+
+    //creando un usuario para firebase
+    const registerForm = (data) => {
+        console.log(data);
+        
+        createUserWithEmailAndPassword(auth_user, data.email, data.password)
+        .then((userCredential) => {
+            const user = userCredential.user;
+            console.log(user);
+            //redigirlo a la pagina principal
+            navigate('/')
+        }).catch((error) => {
+            console.log("Error al registrar el usuario", error);
+        })
+    }
+
     return (
         <div>
             <h1>Registrar Usuario</h1>
-            <form>
+            <form onSubmit={handleSubmit(registerForm)}>
                 <div>
                     <label htmlFor="">Correo Electronico</label>
                     <input type="email" placeholder='Ingrese su correo' {...register('email', {required: true})}/>
